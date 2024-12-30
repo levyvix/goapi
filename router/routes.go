@@ -2,16 +2,25 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	docs "github.com/levyvix/goapi/docs"
 	"github.com/levyvix/goapi/handler"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitializeRoutes(router *gin.Engine) {
 
-	//initialize handler
+	basePath := "/api/v1"
 
+	//init docs
+	docs.SwaggerInfo.BasePath = basePath
+
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.NewHandler()))
+
+	//initialize handler
 	handler.InitializeHandler()
 
-	v1 := router.Group("/api/v1")
+	v1 := router.Group(basePath)
 	{
 		v1.GET("/opening", handler.GetOpening)
 		v1.POST("/opening", handler.PostOpening)
