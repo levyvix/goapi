@@ -7,6 +7,17 @@ import (
 	"github.com/levyvix/goapi/schemas"
 )
 
+//	@BasePath		/api/v1
+//	@Summary		Create Opening
+//	@Description	Create a single Opening by ID
+//	@Tags			Openings
+//	@Accept			json
+//	@Produce		json
+//	@Param			opening	body		handler.CreateOpeningRequest	true	"Opening"
+//	@Success		200		{object}	handler.GetOpeningResponse
+//	@Failure		400		{object}	handler.ErrorResponse
+//	@Failure		500		{object}	handler.ErrorResponse
+//	@Router			/opening [post]
 func PostOpening(ctx *gin.Context) {
 	request := CreateOpeningRequest{}
 

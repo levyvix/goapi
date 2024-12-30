@@ -47,20 +47,19 @@ func (r *CreateOpeningRequest) Validate() error {
 }
 
 type UpdateOpeningRequest struct {
-	ID       uint    `json:"id"`
-	Role     string  `json:"role"`
-	Company  string  `json:"company"`
-	Location string  `json:"location"`
-	Remote   *bool   `json:"remote"`
-	Link     string  `json:"link"`
-	Salary   float64 `json:"salary"`
+	Role     string  `json:"role,omitempty"`
+	Company  string  `json:"company,omitempty"`
+	Location string  `json:"location,omitempty"`
+	Remote   *bool   `json:"remote,omitempty"`
+	Link     string  `json:"link,omitempty"`
+	Salary   float64 `json:"salary,omitempty"`
 }
 
 func (r *UpdateOpeningRequest) Validate() error {
 	// if any field is not null then it is an update
 
 	if r.Role == "" && r.Company == "" && r.Location == "" && r.Remote == nil && r.Link == "" && r.Salary == 0 {
-		return fmt.Errorf("Malformed request body. At least one field is required")
+		return fmt.Errorf("malformed request body. At least one field is required")
 	}
 
 	return nil

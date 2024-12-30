@@ -1,4 +1,196 @@
+definitions:
+  handler.CreateOpeningRequest:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: number
+    type: object
+  handler.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  handler.GetOpeningResponse:
+    properties:
+      data:
+        $ref: '#/definitions/schemas.OpeningResponse'
+      message:
+        type: string
+    type: object
+  handler.UpdateOpeningRequest:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: number
+    type: object
+  schemas.OpeningResponse:
+    properties:
+      company:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: number
+      updated_at:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /opening:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a single Opening by ID
+      parameters:
+      - description: Opening ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetOpeningResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Delete Opening
+      tags:
+      - Openings
+    get:
+      consumes:
+      - application/json
+      description: Get a single Opening by ID
+      parameters:
+      - description: Opening ID
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetOpeningResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Get Opening
+      tags:
+      - Openings
+    post:
+      consumes:
+      - application/json
+      description: Create a single Opening by ID
+      parameters:
+      - description: Opening
+        in: body
+        name: opening
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CreateOpeningRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetOpeningResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Create Opening
+      tags:
+      - Openings
+    put:
+      consumes:
+      - application/json
+      description: Update a single Opening by ID
+      parameters:
+      - description: Opening ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: Opening
+        in: body
+        name: opening
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateOpeningRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetOpeningResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: Update Opening
+      tags:
+      - Openings
 swagger: "2.0"

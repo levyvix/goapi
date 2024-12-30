@@ -8,6 +8,17 @@ import (
 	"github.com/levyvix/goapi/schemas"
 )
 
+//	@BasePath		/api/v1
+//	@Summary		Get Opening
+//	@Description	Get a single Opening by ID
+//	@Tags			Openings
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"Opening ID"
+//	@Success		200	{object}	handler.GetOpeningResponse
+//	@Failure		400	{object}	handler.ErrorResponse
+//	@Failure		404	{object}	handler.ErrorResponse
+//	@Router			/opening [get]
 func GetOpening(ctx *gin.Context) {
 	id := ctx.Query("id")
 
@@ -18,7 +29,7 @@ func GetOpening(ctx *gin.Context) {
 
 	opening := schemas.Opening{}
 
-	//find opening
+	// Find opening
 	err := db.First(&opening, id).Error
 	if err != nil {
 		sendErr(ctx, http.StatusNotFound, fmt.Sprintf("opening %s not found", id))
@@ -26,5 +37,4 @@ func GetOpening(ctx *gin.Context) {
 	}
 
 	sendSuccess(ctx, "get", opening)
-
 }

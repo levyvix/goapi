@@ -8,6 +8,18 @@ import (
 	"github.com/levyvix/goapi/schemas"
 )
 
+//	@BasePath		/api/v1
+//	@Summary		Delete Opening
+//	@Description	Delete a single Opening by ID
+//	@Tags			Openings
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	query		string	true	"Opening ID"
+//	@Success		200	{object}	handler.GetOpeningResponse
+//	@Failure		400	{object}	handler.ErrorResponse
+//	@Failure		404	{object}	handler.ErrorResponse
+//	@Failure		500	{object}	handler.ErrorResponse
+//	@Router			/opening [delete]
 func DeleteOpening(ctx *gin.Context) {
 
 	id := ctx.Query("id")

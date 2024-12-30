@@ -8,6 +8,18 @@ import (
 	"github.com/levyvix/goapi/schemas"
 )
 
+// @BasePath		/api/v1
+// @Summary		Update Opening
+// @Description	Update a single Opening by ID
+// @Tags			Openings
+// @Accept			json
+// @Produce		json
+// @Param			id		query		string							true	"Opening ID"
+// @Param			opening	body		handler.UpdateOpeningRequest	true	"Opening"
+// @Success		200		{object}	handler.GetOpeningResponse
+// @Failure		400		{object}	handler.ErrorResponse
+// @Failure		500		{object}	handler.ErrorResponse
+// @Router			/opening [put]
 func PutOpening(ctx *gin.Context) {
 	request := UpdateOpeningRequest{}
 

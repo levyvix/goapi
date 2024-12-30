@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	docs "github.com/levyvix/goapi/docs"
 	"github.com/levyvix/goapi/handler"
-	swaggerfiles "github.com/swaggo/files"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
@@ -14,8 +14,6 @@ func InitializeRoutes(router *gin.Engine) {
 
 	//init docs
 	docs.SwaggerInfo.BasePath = basePath
-
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.NewHandler()))
 
 	//initialize handler
 	handler.InitializeHandler()
@@ -28,4 +26,6 @@ func InitializeRoutes(router *gin.Engine) {
 		v1.DELETE("/opening", handler.DeleteOpening)
 		v1.GET("/openings", handler.ListOpenings)
 	}
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 }
