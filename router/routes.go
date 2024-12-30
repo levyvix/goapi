@@ -1,39 +1,18 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/levyvix/goapi/handler"
 )
 
 func InitializeRoutes(router *gin.Engine) {
 
 	v1 := router.Group("/api/v1")
 	{
-		v1.GET("/openings", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "get openings",
-			})
-		})
-		v1.POST("/openings", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "post openings",
-			})
-		})
-		v1.PUT("/openings", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "put openings",
-			})
-		})
-		v1.DELETE("/openings", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "delete openings",
-			})
-		})
-		v1.PATCH("/openings", func(c *gin.Context) {
-			c.JSON(http.StatusOK, gin.H{
-				"message": "patch openings",
-			})
-		})
+		v1.GET("/opening", handler.GetOpening)
+		v1.POST("/opening", handler.PostOpening)
+		v1.PUT("/opening", handler.PutOpening)
+		v1.DELETE("/opening", handler.DeleteOpening)
+		v1.GET("/openings", handler.ListOpenings)
 	}
 }
