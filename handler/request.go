@@ -45,3 +45,14 @@ func (r *CreateOpeningRequest) Validate() error {
 
 	return nil
 }
+
+type DeleteOpeningRequest struct {
+	ID uint
+}
+
+func (r *DeleteOpeningRequest) Validate() error {
+	if r.ID == 0 {
+		return fmt.Errorf("malformed request body")
+	}
+	return nil
+}
